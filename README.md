@@ -32,6 +32,7 @@ You need to pass the following query params in the URL:
 | `time_ms`        | `5000` (default)                        | _(optional)_: Time in milliseconds that each chat message should be displayed for                                                                         |
 | `debug`          | `1` or `0`                              | _(optional)_: Provides extra logging                                                                                                                      |
 | `hide_error`     | `1` or `0` (default: 0)                 | _(optional)_: Hides the error in the event of a networking event. Configuration errors will still display (e.g. if you don't provide required parameters) |
+| `connect`        | `sse` or `ws`                           | _(optional)_: Connection mode, one of: `ws` (web sockets), `sse` (server-sent events) (default: `ws`)                                                     |
 | `bg`             | `ef15bf`                                | _(optional)_: Adds the provided hex colour code as a background colour (default: transparent/none)                                                        |
 | `fg`             | `fff`                                   | _(optional)_: Adds the provided hex colour code as the text colour (default: ffffff)                                                                      |
 
