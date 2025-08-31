@@ -4,6 +4,7 @@ import ChatMessage from "./components/ChatMessage.vue";
 import Alert from "./components/Alert.vue";
 import {
   broadcasterIdFromURL,
+  connectModeFromURL,
   debugModeFromURL,
   hexBackgroundColourFromURL,
   hexForegroundColourFromURL,
@@ -16,7 +17,8 @@ import {
 } from "./utils/url-utils.ts";
 import {
   AbstractrrrHealthResponse,
-  connectToChat,
+  connectToChatWs,
+  connectToChatSSE,
 } from "./utils/networking-utils.ts";
 import {
   ChatBadgeLookup,
@@ -46,7 +48,7 @@ const broadcasterId = broadcasterIdFromURL()
 const messageVisibility = messageVisibilityMilliseconds()
 const hideError = shouldHideErrorConfigFromURL()
 const MAX_RETRIES = 20
-const RETRY_INTERVAL_MS = 500
+const RETRY_INTERVAL_MS = 1000
 
 const apiClient = new AbstractrrrApiClient({
   host,
@@ -193,6 +195,8 @@ const initChatConnection = async ({
       chatBadgeLookup.value = transformChatBadgesResponseToLookup(data)
       abstractrrrConnectionError.value = false
     })
+
+  const connectToChat = connectModeFromURL() === 'sse' ? connectToChatSSE : connectToChatWs
 
   // Connect to chat
   connectToChat({

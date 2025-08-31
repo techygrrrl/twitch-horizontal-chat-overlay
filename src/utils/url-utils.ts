@@ -28,6 +28,16 @@ export function hostFromURL() {
   return params.get("host") || "localhost";
 }
 
+export function connectModeFromURL() {
+  const params = new URLSearchParams(location.search);
+  let connectMode = 'ws'
+  if (params.get("connect") === 'sse') {
+    connectMode = 'sse'
+  }
+
+  return connectMode
+}
+
 export function debugModeFromURL(): boolean {
   const params = new URLSearchParams(location.search);
 
